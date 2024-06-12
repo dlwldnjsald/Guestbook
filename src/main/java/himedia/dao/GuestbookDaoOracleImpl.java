@@ -26,19 +26,20 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 	}
 	
 	// 데이터베이스 접속 정보 -> 컨텍스트 파라미터로부터 받아옴
-	// connection 공통 메서드
-	private Connection getConnection() throws SQLException {
-		Connection conn = null;
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(dburl, dbuser, dbpass);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		// Connection 공통 메서드
+		private Connection getConnection() throws SQLException {
+			Connection conn = null;
+
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
+				conn = DriverManager.getConnection(dburl, dbuser, dbpass);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
+			return conn;
 		}
-		return conn;
-	}
 
 	@Override
 	public List<GuestbookVo> getList() {
@@ -128,6 +129,7 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 
 	@Override
 	public boolean delete(Long no) {
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int deletedCount = 0;
@@ -139,6 +141,7 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 			pstmt.setLong(1, no);
 			
 			deletedCount = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

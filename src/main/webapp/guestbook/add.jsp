@@ -1,4 +1,5 @@
 <%@ page import="java.sql.*" %>
+<%@page import="jakarta.servlet.http.HttpServletResponse" %>
 
 <%@page import="himedia.dao.GuestbookDao"%>
 <%@ page import="himedia.dao.GuestbookDaoOracleImpl" %>
@@ -19,34 +20,30 @@
 <%
 	// DB 접속 정보 확인
 	ServletContext context = getServletContext();
-
 	String dbuser = context.getInitParameter("dbuser");
 	String dbpass = context.getInitParameter("dbpass");
 
 	
 	//	폼 입력 데이터	
-	String name = request.getParameter("name");
-	String pass = request.getParameter("pass");
-	String content = request.getParameter("content");
+	String names = request.getParameter("name");
+	String passwords = request.getParameter("pass");
+	String contents = request.getParameter("content");
 	
-	//GuestbookVo 객체를 생성하고, 
-	//GuestbookDaoOracleImpl 객체를 생성한 후에, 
-	//insert() 메서드를 사용하여 데이터를 데이터베이스에 삽입하는 부분
-	GuestbookVo vo = new GuestbookVo(name, pass, content);
+	
+	//GuestbookVo 객체 vo를 생성하고, 위 파라미터 담아주기
+	GuestbookVo vo = new GuestbookVo(names, passwords, contents);
+	//GuestbookDaoOracleImpl 객체 dao를 생성한 후에, 
 	GuestbookDao dao = new GuestbookDaoOracleImpl(dbuser, dbpass);
 	
+	//성공시 dao객체에 위의 vo객체를 사용하여 insert수행위한 호출
 	boolean success = dao.insert(vo);
 	
-	if (success) {
-		response.sendRedirect(request.getContextPath() + "/guestbook/list.jsp");
+	if (success) { //	INSERT 성공시 리다이렉트 to "/guestbook/"
+		response.sendRedirect(request.getContextPath() + "/guestbook/");
 	
 	}else {
-		
-			%>
-			<h1>Error</h1>
-			<p>데이터 입력 중 오류가 발생했습니다</p>
-			<%
-			
+		response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "데이터 입력 중 오류가 발생했습니다.");
 	}
-
+		
+		
 %>
