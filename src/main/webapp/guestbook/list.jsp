@@ -1,12 +1,6 @@
 ﻿
 <%@page import="java.sql.*" %>
 
-<%@page import="java.util.List" %>
-<%@page import="himedia.dao.GuestbookDaoOracleImpl" %>
-<%@page import="himedia.dao.GuestbookDao" %>
-<%@page import="himedia.vo.GuestbookVo" %>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -14,6 +8,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 	<title>방명록</title>
+	<%-- list.jsp: 방명록을 보여주는 페이지입니다. 
+	이 페이지에서는 방명록 항목을 표시하고, 
+	각 항목마다 삭제 링크를 통해 해당 항목을 삭제할 수 있습니다.
+	
+	list.jsp에서는 삭제 링크를 클릭했을 때, 
+	deleteform.jsp로 올바른 방명록 번호를 전달해야 합니다--%>
 	
 </head>
 
