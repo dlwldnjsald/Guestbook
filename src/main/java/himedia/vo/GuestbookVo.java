@@ -29,6 +29,7 @@ public class GuestbookVo {
 						String content, 
 						Date regDate) {
 		
+		super();
 		this.no = no;
 		this.name = name;
 		this.password = password;

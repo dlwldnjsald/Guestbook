@@ -56,7 +56,7 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 			//stmt
 			stmt = conn.createStatement();
 			//query 
-			String sql = "SELECT * FROM Guestbook ORDER BY reg_date DESC";
+			String sql = "SELECT * FROM guestbook ORDER BY reg_date DESC";
 			//rs
 			rs = stmt.executeQuery(sql);
 			//rs-> 자바객체로 전환
@@ -102,7 +102,7 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 			conn = getConnection();
 			//sql
 			String sql = "INSERT INTO Guestbook (no, name, password, content, reg_date) "+
-						"values (seq_guestbook_no.nextval, ?, ?, ?)";
+						"values (seq_guestbook_no.nextval, ?, ?, ?, SYSDATE)";
 			pstmt = conn.prepareStatement(sql);
 			
 			//binding data
@@ -124,7 +124,7 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 			}
 		}
 		
-		return 1 == insertedCount;
+		return insertedCount == 1;
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 		
 		try {
 			conn = getConnection();
-			String sql = "DELETE FROM Guestbook WHERE no=?";
+			String sql = "DELETE FROM guestbook WHERE no = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, no);
 			
@@ -153,7 +153,7 @@ public class GuestbookDaoOracleImpl implements GuestbookDao{
 				e.printStackTrace();
 			}
 		}
-		return 1 == deletedCount;
+		return deletedCount == 1;
 	}
 	
 	

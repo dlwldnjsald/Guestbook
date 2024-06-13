@@ -1,17 +1,15 @@
-package himedia;
+package himedia.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 
 import himedia.dao.GuestbookDao;
 import himedia.dao.GuestbookDaoOracleImpl;
 import himedia.vo.GuestbookVo;
+
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
